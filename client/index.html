@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script defer src="script.js"></script>
+    <title>PEWS Calculator</title>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <div class="max-w-4xl mx-auto p-6">
+        <!-- Header -->
+        <div class="mb-10">
+            <h1 class="text-3xl font-bold text-center text-blue-600 mb-4">Pontuação de Alerta Precoce Pediátrico (PEWS)</h1>
+            <p class="text-center text-gray-600">Preencha as informações abaixo para iniciar a avaliação.</p>
+        </div>
+
+        <!-- Identificação da Criança -->
+        <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg mb-6">
+            <h2 class="text-xl font-semibold text-blue-500 mb-4">Identificação da Criança</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="crianca-nome">Nome</label>
+                    <input type="text" id="crianca-nome" class="border border-gray-300 p-3 rounded-lg w-full" placeholder="Nome da criança">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="crianca-leito">Leito</label>
+                    <input type="text" id="crianca-leito" class="border border-gray-300 p-3 rounded-lg w-full" placeholder="Leito">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="crianca-diagnostico">Diagnóstico</label>
+                    <input type="text" id="crianca-diagnostico" class="border border-gray-300 p-3 rounded-lg w-full" placeholder="Diagnóstico">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="crianca-data">Data da Avaliação</label>
+                    <input type="date" id="crianca-data" class="border border-gray-300 p-3 rounded-lg w-full">
+                </div>
+            </div>
+        </div>
+
+        <!-- Iniciar Avaliação -->
+        <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg mb-6">
+            <h2 class="text-xl font-semibold text-blue-500 mb-4">Faixa Etária</h2>
+            <label class="block text-sm font-medium text-gray-700 mb-2" for="faixa-etaria">Selecione a faixa etária</label>
+            <select id="faixa-etaria" class="border border-gray-300 p-3 rounded-lg w-full">
+                <option value="">Selecione a faixa etária</option>
+                <option value="0 a 11 meses">0 a 11 meses</option>
+                <option value="1 a 4 anos">1 a 4 anos</option>
+                <option value="5 a 12 anos">5 a 12 anos</option>
+                <option value="maior ou igual a 13">Maior ou igual a 13 anos</option>
+            </select>
+        </div>
+
+
+        <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg mb-6">
+            <h2 class="text-xl font-semibold text-blue-500 mb-4">Sinais Vitais Aferidos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2" for="faixa-etaria">Estado do paciente</label>
+                    <select id="faixa-etaria" class="border border-gray-300 p-3 rounded-lg w-full">
+                        <option value="">Selecione o estado</option>
+                        <option value="vigilia">Vigília</option>
+                        <option value="sono">Sono</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="avaliador-nome">Frequência Cardíaca Por Minuto</label>
+                    <input type="text" id="frenquencia" class="border border-gray-300 p-3 rounded-lg w-full" placeholder="Frequência Cardíaca Por Minuto">
+                </div>
+            </div>
+        </div>
+
+        <!-- Seções de Pontuação -->
+        <div class="space-y-6">
+            <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg comportamento" data-category="comportamento">
+                <h2 class="text-xl font-semibold text-blue-500 mb-4">Comportamento</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button data-score="0" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Ativo</button>
+                    <button data-score="1" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Sonolento</button>
+                    <button data-score="2" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Irritado</button>
+                    <button data-score="3" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Letárgico</button>
+                </div>
+            </div>
+            <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg cardiovascular" data-category="cardiovascular">
+                <h2 class="text-xl font-semibold text-blue-500 mb-4">Cardiovascular</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button data-score="0" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Corado ou TEC 1-2 seg</button>
+                    <button data-score="1" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Pálido ou TEC 3 seg ou FC acima do limite superior para a idade</button>
+                    <button data-score="2" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Moteado ou TEC 4 seg ou FC ≥ 20 bpm acima do limite superior para a idade</button>
+                    <button data-score="3" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Acinzentado / cianótico ou TEC ≥ 5 seg ou FC ≥ 30 bpm acima do limite superior para a idade ou bradicardia para a idade</button>
+                </div>
+            </div>
+            <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg respiratorio" data-category="respiratorio">
+                <h2 class="text-xl font-semibold text-blue-500 mb-4">Respiratório</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button data-score="0" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">FR normal para a idade, sem retração</button>
+                    <button data-score="1" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">FR acima do limite superior para a idade, uso de musculatura acessória ou FiO2 ≥ 30% ou 4 litros/min de O2</button>
+                    <button data-score="2" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">FR ≥ 20 rpm acima do limite superior para a idade, retrações subcostais, intercostais e de fúrcula ou FiO2 ≥ 40% ou 6 litros/min de O2</button>
+                    <button data-score="3" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">FR ≥ 5 rpm abaixo do limite inferior para a idade, retrações subcostais, intercostais, de fúrcula, do esterno e gemência ou FiO2 ≥ 50% ou 8 litros/min de O2</button>
+                </div>
+            </div>
+            <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg nebulizadores" data-category="nebulizadores">
+                <h2 class="text-xl font-semibold text-blue-500 mb-4">Nebulizadores de resgate em 15 minutos</h2>
+                <div class="flex justify-center gap-4">
+                    <button data-score="2" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Sim</button>
+                    <button data-score="0" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Não</button>
+                </div>
+            </div>
+        
+            <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg vomito" data-category="vomito">
+                <h2 class="text-xl font-semibold text-blue-500 mb-4">3 episódios ou mais de emese no pós-operatório</h2>
+                <div class="flex justify-center gap-4">
+                    <button data-score="2" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Sim</button>
+                    <button data-score="0" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Não</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-blue-50 border-t-4 border-blue-500 p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold text-blue-600 mb-4 text-center">Resultado da Avaliação</h2>
+            <div class="text-center">
+                <p class="text-xl font-semibold text-gray-800 mb-2">
+                    Pontuação PEWS Calculada: 
+                    <span id="pews-score" class="text-blue-600 font-bold">0</span> Pontos
+                </p>
+                <p class="text-lg text-gray-700 mt-2">
+                    <span class="font-semibold text-blue-600">Intervenção:</span> 
+                    <span id="pews-intervention" class="font-medium">Nenhuma intervenção necessária</span>
+                </p>
+                <p class="text-lg text-gray-700 mt-2">
+                    <span class="font-semibold text-blue-600">Tempo de Controle de SSVV:</span> 
+                    <span id="pews-time" class="font-medium">N/A</span>
+                </p>
+            </div>
+        </div>
+        <div class="mt-8 flex justify-center">
+            <button id="save-button" class="px-6 py-3 bg-green-500 text-white font-bold rounded">Salvar Consulta</button>
+        </div>
+        
+
+</body>
+</html>

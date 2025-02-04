@@ -1,0 +1,14 @@
+{
+    "name": "pews-frontend",
+    "version": "1.0.0",
+    "description": "Frontend para o projeto PEWS",
+    "main": "index.html",
+    "scripts": {
+      "start": "http-server -p 8080"
+    },
+    "dependencies": {
+      "http-server": "^0.12.3"
+    },
+    "author": "",
+    "license": "ISC"
+  }

@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./server
+    ports:
+      - "5000:5000"  
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/pewsdb  
+    depends_on:
+      - mongo
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+
+  frontend:
+    build: ./client
+    ports:
+      - "8080:8080"  
+    volumes:
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"  
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

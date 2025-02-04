@@ -1,0 +1,17 @@
+# Projeto Web App
+
+Este projeto é uma aplicação web que inclui uma tela de login e um calculador PEWS. Ele usa um backend Node.js com MongoDB e um frontend simples com HTML, CSS e JavaScript.
+
+## Estrutura do Projeto
+## Instruções de Configuração
+
+### Pré-requisitos
+
+- Docker e Docker Compose instalados
+- Node.js e npm instalados
+
+### Passos para Configuração
+
+1. Clone o repositório:
+   ```sh
+   git clone <repository-url>
