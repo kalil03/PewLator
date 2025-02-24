@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
         nebulizadores: 0,
         vomito: 0,
     };
-
     document.querySelectorAll('.score-button').forEach(button => {
         button.addEventListener('click', function () {
             const categoryElement = this.closest('[data-category]');
@@ -14,33 +13,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error("Erro: categoria não encontrada para", this);
                 return;
             }
-
             const category = categoryElement.dataset.category;
             const score = parseInt(this.dataset.score);
-
             // Resetar botões da mesma categoria
             categoryElement.querySelectorAll('.score-button').forEach(btn => {
                 btn.classList.remove('bg-blue-500', 'text-white');
                 btn.classList.add('bg-blue-100', 'text-blue-600');
             });
-
             // Destacar botão selecionado
             this.classList.remove('bg-blue-100', 'text-blue-600');
             this.classList.add('bg-blue-500', 'text-white');
-
             // Atualizar pontuação
             scores[category] = score;
             updateScore();
         });
     });
-
+    // logica pews
     function updateScore() {
         const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
         document.getElementById('pews-score').innerText = totalScore;
-
         const intervention = document.getElementById('pews-intervention');
         const time = document.getElementById('pews-time');
-
         if (totalScore === 0) {
             intervention.innerText = "Manter rotina de avaliação. PEWS a cada 24 horas.";
             time.innerText = "Sinais Vitais de 6/6 horas";
@@ -55,15 +48,13 @@ document.addEventListener('DOMContentLoaded', function() {
             time.innerText = "Sinais Vitais de 1/1 hora";
         }
     }
-
-    // Sistema de Autenticação
+    // autenticacao
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
             try {
                 const response = await fetch('http://localhost:5000/login', {
                     method: 'POST',
@@ -82,8 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    // Sistema de Cadastro
+    // cadastro
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
         registerForm.addEventListener('submit', async function(e) {
@@ -95,14 +85,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 username: document.getElementById('username').value,
                 password: document.getElementById('password').value
             };
-
             try {
                 const response = await fetch('http://localhost:5000/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData)
                 });
-
                 if (!response.ok) throw new Error('Erro no cadastro');
                 alert('Cadastro realizado!');
                 window.location.href = 'login.html';
@@ -111,8 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    // Preencher dados do avaliador
+    // dados do avaliador
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log("Usuário atual:", currentUser); // Isso ajuda a verificar se o usuário está carregando corretamente
     
@@ -127,9 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.warn("Nenhum usuário encontrado no localStorage.");
     }
-    
-
-    // Salvar Consulta
+    // salvar consulta
     document.getElementById('save-button')?.addEventListener('click', async function() {
         const requiredFields = [
             document.getElementById('crianca-nome').value,
@@ -137,18 +122,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('crianca-diagnostico').value,
             document.getElementById('crianca-data').value
         ];
-
         if (requiredFields.some(field => !field)) {
             alert('Preencha todos os campos obrigatórios da criança');
             return;
         }
-
         const consultationData = {
-            avaliador: {
-                nome: document.getElementById('avaliador-nome').value,
-                matricula: document.getElementById('avaliador-matricula').value,
-                funcao: document.getElementById('avaliador-funcao').value
-            },
             crianca: {
                 nome: document.getElementById('crianca-nome').value,
                 leito: document.getElementById('crianca-leito').value,
@@ -158,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             faixaEtaria: document.getElementById('faixa-etaria').value,
             sinaisVitais: {
                 estadoPaciente: document.querySelector('select[id="faixa-etaria"]').value,
-                frequenciaCardiaca: document.getElementById('frenquencia').value
+                frequenciaCardiaca: document.getElementById('frequencia').value
             },
             scores: { ...scores },
             resultado: {
@@ -167,7 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 tempoControle: document.getElementById('pews-time').innerText
             }
         };
-
         try {
             const response = await fetch('http://localhost:5000/save-consultation', {
                 method: 'POST',
@@ -177,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(consultationData)
             });
-
             if (!response.ok) throw new Error('Erro ao salvar');
             alert('Consulta salva com sucesso!');
             window.location.reload();

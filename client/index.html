@@ -9,14 +9,32 @@
     <title>PEWS Calculator</title>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <h1 class="text-xl font-bold text-blue-600">PEWS Calculator</h1>
+                    </div>
+                    <div class="flex space-x-10 ml-40">
+                        <a href="index.html" class="border-b-2 border-transparent text-gray-500 hover:border-blue-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Nova Consulta</a>
+                        <a href="historico.html" class="border-b-2 border-transparent text-gray-500 hover:border-blue-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Histórico de Consultas</a>
+                        <a href="cadastros.html" class="border-b-2 border-transparent text-gray-500 hover:border-blue-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Cadastros de Usuários</a>
+                        <a href="instrucoes.html" class="border-b-2 border-transparent text-gray-500 hover:border-blue-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Instruções</a>
+                    </div>
+                </div>
+                <div class="hidden sm:flex sm:items-center">
+                    <button onclick="logout()" class="text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="max-w-4xl mx-auto p-6">
-        <!-- Header -->
         <div class="mb-10">
             <h1 class="text-3xl font-bold text-center text-blue-600 mb-4">Pontuação de Alerta Precoce Pediátrico (PEWS)</h1>
             <p class="text-center text-gray-600">Preencha as informações abaixo para iniciar a avaliação.</p>
         </div>
-
-        <!-- Identificação da Criança -->
         <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg mb-6">
             <h2 class="text-xl font-semibold text-blue-500 mb-4">Identificação da Criança</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -38,8 +56,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Iniciar Avaliação -->
         <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg mb-6">
             <h2 class="text-xl font-semibold text-blue-500 mb-4">Faixa Etária</h2>
             <label class="block text-sm font-medium text-gray-700 mb-2" for="faixa-etaria">Selecione a faixa etária</label>
@@ -51,27 +67,23 @@
                 <option value="maior ou igual a 13">Maior ou igual a 13 anos</option>
             </select>
         </div>
-
-
         <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg mb-6">
             <h2 class="text-xl font-semibold text-blue-500 mb-4">Sinais Vitais Aferidos</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2" for="faixa-etaria">Estado do paciente</label>
-                    <select id="faixa-etaria" class="border border-gray-300 p-3 rounded-lg w-full">
+                    <label class="block text-sm font-medium text-gray-700 mb-2" for="estado-paciente">Estado do paciente</label>
+                    <select id="estado-paciente" class="border border-gray-300 p-3 rounded-lg w-full">
                         <option value="">Selecione o estado</option>
                         <option value="vigilia">Vigília</option>
                         <option value="sono">Sono</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1" for="avaliador-nome">Frequência Cardíaca Por Minuto</label>
-                    <input type="text" id="frenquencia" class="border border-gray-300 p-3 rounded-lg w-full" placeholder="Frequência Cardíaca Por Minuto">
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="frequencia">Frequência Cardíaca Por Minuto</label>
+                    <input type="text" id="frequencia" class="border border-gray-300 p-3 rounded-lg w-full" placeholder="Frequência Cardíaca Por Minuto">
                 </div>
             </div>
         </div>
-
-        <!-- Seções de Pontuação -->
         <div class="space-y-6">
             <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg comportamento" data-category="comportamento">
                 <h2 class="text-xl font-semibold text-blue-500 mb-4">Comportamento</h2>
@@ -107,7 +119,6 @@
                     <button data-score="0" class="score-button bg-blue-100 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-200">Não</button>
                 </div>
             </div>
-        
             <div class="bg-white shadow-lg border border-gray-200 p-6 rounded-lg vomito" data-category="vomito">
                 <h2 class="text-xl font-semibold text-blue-500 mb-4">3 episódios ou mais de emese no pós-operatório</h2>
                 <div class="flex justify-center gap-4">
@@ -116,8 +127,7 @@
                 </div>
             </div>
         </div>
-        
-        <div class="bg-blue-50 border-t-4 border-blue-500 p-6 rounded-lg shadow-md">
+        <div class="bg-white border border-gray-200 p-6 rounded-lg shadow-md mt-6">
             <h2 class="text-2xl font-bold text-blue-600 mb-4 text-center">Resultado da Avaliação</h2>
             <div class="text-center">
                 <p class="text-xl font-semibold text-gray-800 mb-2">
@@ -137,7 +147,13 @@
         <div class="mt-8 flex justify-center">
             <button id="save-button" class="px-6 py-3 bg-green-500 text-white font-bold rounded">Salvar Consulta</button>
         </div>
-        
+        <script>
+            function logout() {
+                localStorage.removeItem('token');
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            }
+        </script>
 
 </body>
 </html>

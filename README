@@ -1,17 +1,62 @@
 # Projeto Web App
 
-Este projeto é uma aplicação web que inclui uma tela de login e um calculador PEWS. Ele usa um backend Node.js com MongoDB e um frontend simples com HTML, CSS e JavaScript.
+Este projeto é uma aplicação web que inclui uma tela de login e uma calculadora PEWS. Ele usa um backend Node.js com MongoDB e um frontend simples com HTML, Tailwind CSS e JavaScript.
 
 ## Estrutura do Projeto
-## Instruções de Configuração
+
+- `server/`: Contém o código do backend (Node.js, Express, Mongoose).
+  - `models/`: Contém os modelos Mongoose (`User.js`, `Consultation.js`).
+  - `routes/`: Contém as rotas da aplicação (`auth.js`, `consultation.js`).
+  - `server.js`: Arquivo principal do servidor.
+- `client/`: Contém o código do frontend (HTML, CSS, JavaScript).
+  - `index.html`: Página principal da aplicação.
+  - `login.html`: Página de login.
+  - `register.html`: Página de registro.
+  - `historico.html`: Página de histórico de consultas.
+  - `script.js`: Arquivo JavaScript principal.
+
+## Padrão de Projeto Utilizado
+
+Este projeto segue o padrão de projeto **MVC (Model-View-Controller)**. Abaixo está uma descrição de como cada componente se encaixa nesse padrão:
+
+### Modelo (Model)
+
+Os modelos são representados pelas definições de esquema do Mongoose para `User` e `Consultation`. Eles definem a estrutura dos dados e as interações com o banco de dados MongoDB.
+
+### Visão (View)
+
+As visões são representadas pelos arquivos HTML no diretório `client/`. Eles definem a interface do usuário e a apresentação dos dados.
+
+### Controlador (Controller)
+
+Os controladores são representados pelas rotas e lógica de negócios no diretório `routes/`. Eles lidam com as requisições HTTP, interagem com os modelos e retornam as respostas apropriadas.
+
+## Funcionalidades
+
+- **Autenticação de Usuário**: Registro, login e logout de usuários.
+- **Calculadora PEWS**: Interface para calcular a Pontuação de Alerta Precoce Pediátrico.
+- **Histórico de Consultas**: Visualização do histórico de consultas realizadas.
+- **Cadastro de Usuários**: Interface para cadastro de novos usuários.
+
+## Tecnologias Utilizadas
+
+- **Backend**:
+  - Node.js
+  - Express.js
+  - Mongoose (para interações com MongoDB)
+- **Frontend**:
+  - HTML
+  - Tailwind CSS
+  - JavaScript
+- **Banco de Dados**:
+  - MongoDB
+
+## Instalação e Execução
 
 ### Pré-requisitos
 
-- Docker e Docker Compose instalados
-- Node.js e npm instalados
+- Node.js instalado
+- MongoDB instalado e em execução
 
-### Passos para Configuração
-
-1. Clone o repositório:
-   ```sh
-   git clone <repository-url>
+### Feramentas de teste
+- supertest e jest

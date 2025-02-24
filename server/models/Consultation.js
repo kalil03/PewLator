@@ -2,29 +2,28 @@ const mongoose = require('mongoose');
 
 const consultationSchema = new mongoose.Schema({
     crianca: {
-        nome: String,
-        leito: String,
-        diagnostico: String,
-        dataAvaliacao: Date
+        nome: { type: String, required: true },
+        leito: { type: String, required: true },
+        diagnostico: { type: String, required: true },
+        dataAvaliacao: { type: Date, required: true }
     },
-    faixaEtaria: String,
+    faixaEtaria: { type: String, required: true },
     sinaisVitais: {
-        estadoPaciente: String,
-        frequenciaCardiaca: String
+        estadoPaciente: { type: String, required: true },
+        frequenciaCardiaca: { type: String, required: true }
     },
     scores: {
-        comportamento: Number,
-        cardiovascular: Number,
-        respiratorio: Number,
-        nebulizadores: Number,
-        vomito: Number
+        comportamento: { type: Number, required: true },
+        cardiovascular: { type: Number, required: true },
+        respiratorio: { type: Number, required: true },
+        nebulizadores: { type: Number, required: true },
+        vomito: { type: Number, required: true }
     },
     resultado: {
-        total: Number,
-        intervencao: String,
-        tempoControle: String
-    },
-    createdAt: { type: Date, default: Date.now }
+        total: { type: Number, required: true },
+        intervencao: { type: String, required: true },
+        tempoControle: { type: String, required: true }
+    }
 });
 
 module.exports = mongoose.model('Consultation', consultationSchema);

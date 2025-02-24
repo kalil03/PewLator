@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela PEWS Original</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #e0e0e0;
+        }
+        .pontuacao th {
+            background-color: #007BFF;
+            color: white;
+        }
+        .protocolo th {
+            background-color: #28a745;
+            color: white;
+        }
+        .destaque {
+            background-color: #fff3cd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabela de Apoio PEWS</h1>
+
+    <!-- Tabela de Parâmetros Fisiológicos -->
+    <table>
+        <tr>
+            <th colspan="2">Frequência respiratória minuto</th>
+            <th colspan="2">Frequência cardíaca minuto</th>
+        </tr>
+        <tr>
+            <th>Idade</th>
+            <th>Valores</th>
+            <th>Idade</th>
+            <th>Vigília</th>
+            <th>Sono</th>
+        </tr>
+        <tr>
+            <td>&lt; 2 meses</td>
+            <td>30 – 60</td>
+            <td>Recém-nascido</td>
+            <td>100 – 205</td>
+            <td>90 – 160</td>
+        </tr>
+        <tr>
+            <td>2 meses × 1 ano</td>
+            <td>30 – 53</td>
+            <td>1 mês × 1 ano</td>
+            <td>100 – 180</td>
+            <td>80 – 160</td>
+        </tr>
+        <tr>
+            <td>1 – 3 anos</td>
+            <td>22 – 37</td>
+            <td>1 – 3 anos</td>
+            <td>98 – 140</td>
+            <td>80 – 120</td>
+        </tr>
+        <tr>
+            <td>4 – 5 anos</td>
+            <td>20 – 28</td>
+            <td>4 – 5 anos</td>
+            <td>80 – 120</td>
+            <td>65 – 100</td>
+        </tr>
+        <tr>
+            <td>6 – 12 anos</td>
+            <td>18 – 25</td>
+            <td>6 – 12 anos</td>
+            <td>75 – 118</td>
+            <td>58 – 90</td>
+        </tr>
+        <tr>
+            <td>&gt; 12 anos</td>
+            <td>12 – 20</td>
+            <td>13 – 18 anos</td>
+            <td>60 – 100</td>
+            <td>59 – 90</td>
+        </tr>
+    </table>
+
+    <!-- Tabela de Componentes e Pontuação -->
+    <table class="pontuacao">
+        <tr>
+            <th rowspan="2">COMPONENTE</th>
+            <th colspan="4">PORTUAÇÃO</th>
+        </tr>
+        <tr>
+            <th>0</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+        </tr>
+        <tr>
+            <td>Estado Neurológico</td>
+            <td>Ativo</td>
+            <td>Sonolento / Hipoativo</td>
+            <td>Irritado</td>
+            <td>Letárgico / obnubilado ou resposta reduzida a dor</td>
+        </tr>
+        <tr>
+            <td>Cardiovascular</td>
+            <td>Corado ou TEC 1-2 seg</td>
+            <td>Pálido ou TEC 3 seg ou FC acima do limite superior para idade</td>
+            <td>Moteado ou TEC 4 seg ou FC ≥ 20 bpm acima do limite superior para a idade</td>
+            <td>Acinzentado / cianótico ou TEC ≥ 5 seg ou FC ≥ 30 bpm acima do limite superior para a idade ou bradicardia para a idade</td>
+        </tr>
+        <tr>
+            <td>Respiratorio</td>
+            <td>FR normal para a idade</td>
+            <td>FR acima do limite superior + O₂ suplementar</td>
+            <td>FR ≥ 20 acima do limite + assistência respiratória</td>
+            <td>FR ≥ 5 abaixo do limite + ventilação mecânica</td>
+        </tr>
+    </table>
+
+    <!-- Portuação Extra -->
+    <div class="destaque" style="padding: 15px; margin: 20px 0;">
+        <h3>PORTUAÇÃO EXTRA</h3>
+        <p>Adicionar 02 pontos extras se:</p>
+        <ul>
+            <li>Recebeu nebulização até há 15 minutos</li>
+            <li>Vômitos persistentes após cirurgia (mínimo de 3 episódios) (mínimo de 3 episódios)</li>
+        </ul>
+    </div>
+
+    <!-- Protocolo de Atuação -->
+    <table class="protocolo">
+        <tr>
+            <th>Pontuação</th>
+            <th>Ações</th>
+            <th>Monitoramento</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>Sinais vitais de 6/6 horaS</td>
+            <td>PEWS a cada 24 horas</td>
+        </tr>
+        <tr>
+            <td>1-2</td>
+            <td>Sinais vitais de 4/4 horas</td>
+            <td>Repetir PEWS em 60 min, comunicar médico caso pontuação permaneça.</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Sinais vitais de 2/2 horas</td>
+            <td>Repetir PEWS em 20 min, comunicar médico</td>
+        </tr>
+        <tr>
+            <td>4 a 6</td>
+            <td>Sinais vitais de 1/1 hora</td>
+            <td>Avaliação/acompanhamento de enfermeiro. Repetir em 20 min, abrir chamado. Registrar orientações medicas.</td>
+        </tr>
+        <tr>
+            <td>>6</td>
+            <td>Monitorização contínua</td>
+            <td>Repetir imediatamente por outro avaliador. Avaliação médica imediata.</td>
+        </tr>
+    </table>
+
+    <div style="text-align: center; margin: 20px 0;">
+        <a href="index.html" style="display: inline-block; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px;">Voltar</a>
+    </div>
+</body>
+</html>

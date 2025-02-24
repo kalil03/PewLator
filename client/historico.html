@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script defer src="historico.js"></script>
+    <title>Histórico de Consultas</title>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <h1 class="text-xl font-bold text-blue-600">PEWS Calculator</h1>
+                    </div>
+                    <div class="flex space-x-10 ml-40">
+                        <a href="index.html" class="border-b-2 border-transparent text-gray-500 hover:border-blue-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Nova Consulta</a>
+                        <a href="historico.html" class="border-b-2 border-transparent text-gray-500 hover:border-blue-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Histórico de Consultas</a>
+                        <a href="cadastros.html" class="border-b-2 border-transparent text-gray-500 hover:border-blue-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Cadastros de Usuários</a>
+                        <a href="instrucoes.html" class="border-b-2 border-transparent text-gray-500 hover:border-blue-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Instruções</a>
+                    </div>
+                </div>
+                <div class="hidden sm:flex sm:items-center">
+                    <button onclick="logout()" class="text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="max-w-4xl mx-auto p-6">
+        <div class="mb-10">
+            <h1 class="text-3xl font-bold text-center text-blue-600 mb-4">Histórico de Consultas</h1>
+            <p class="text-center text-gray-600">Veja abaixo as consultas realizadas.</p>
+        </div>
+        <div class="mb-6">
+            <input type="text" id="searchConsultations" class="w-full p-2 border border-gray-300 rounded" placeholder="Buscar consultas...">
+        </div>
+        <div id="consultations" class="space-y-6">
+        </div>
+    </div>
+    <script>
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+        async function loadConsultations() {
+            try {
+                const response = await fetch('http://localhost:5000/consultations', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                if (!response.ok) throw new Error('Erro ao carregar consultas');
+                const consultations = await response.json();
+                const consultationsContainer = document.getElementById('consultations');
+                consultationsContainer.innerHTML = '';
+                consultations.forEach(consultation => {
+                    const consultationElement = document.createElement('div');
+                    consultationElement.className = 'bg-white shadow-lg border border-gray-200 p-6 rounded-lg';
+                    consultationElement.innerHTML = `
+                        <h2 class="text-xl font-semibold text-blue-500 mb-4">Consulta de ${consultation.crianca.nome}</h2>
+                        <p><strong>Leito:</strong> ${consultation.crianca.leito}</p>
+                        <p><strong>Diagnóstico:</strong> ${consultation.crianca.diagnostico}</p>
+                        <p><strong>Data da Avaliação:</strong> ${new Date(consultation.crianca.dataAvaliacao).toLocaleDateString()}</p>
+                        <p><strong>Faixa Etária:</strong> ${consultation.faixaEtaria}</p>
+                        <p><strong>Estado do Paciente:</strong> ${consultation.sinaisVitais.estadoPaciente}</p>
+                        <p><strong>Frequência Cardíaca:</strong> ${consultation.sinaisVitais.frequenciaCardiaca}</p>
+                        <p><strong>Pontuação PEWS:</strong> ${consultation.resultado.total}</p>
+                        <p><strong>Intervenção:</strong> ${consultation.resultado.intervencao}</p>
+                        <p><strong>Tempo de Controle de SSVV:</strong> ${consultation.resultado.tempoControle}</p>
+                        <button class="delete-consultation bg-red-500 text-white p-2 rounded mt-4" data-id="${consultation._id}">Excluir</button>
+                    `;
+                    consultationsContainer.appendChild(consultationElement);
+                });
+                document.querySelectorAll('.delete-consultation').forEach(button => {
+                    button.addEventListener('click', async function() {
+                        const consultationId = this.getAttribute('data-id');
+                        if (confirm('Tem certeza que deseja excluir esta consulta?')) {
+                            try {
+                                const response = await fetch(`http://localhost:5000/delete-consultation/${consultationId}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                                    }
+                                });
+                                if (!response.ok) {
+                                    const errorData = await response.json();
+                                    alert('Erro ao excluir consulta: ' + errorData.message);
+                                    return;
+                                }
+                                alert('Consulta excluída com sucesso');
+                                loadConsultations();
+                            } catch (error) {
+                                console.error('Erro ao excluir consulta:', error);
+                                alert('Erro ao excluir consulta');
+                            }
+                        }
+                    });
+                });
+            } catch (error) {
+                console.error(error);
+                alert('Erro ao carregar consultas');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', loadConsultations);
+    </script>
+</body>
+</html>

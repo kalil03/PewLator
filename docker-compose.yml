@@ -1,32 +1,46 @@
-version: '3.8'
-
 services:
   backend:
     build: ./server
     ports:
-      - "5000:5000"  
+      - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/pewsdb  
+      - MONGO_URI=mongodb://mongo:27017/pewsdb  # Usa o nome do serviço "mongo"
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy  # Aguarda até o MongoDB estar pronto
     volumes:
       - ./server:/usr/src/app
       - /usr/src/app/node_modules
+    networks:
+      - my-network  # Rede personalizada para comunicação entre serviços
 
   frontend:
     build: ./client
     ports:
-      - "8080:8080"  
+      - "8080:8080"
     volumes:
       - ./client:/usr/src/app
       - /usr/src/app/node_modules
+    networks:
+      - my-network
 
   mongo:
     image: mongo:latest
     ports:
-      - "27017:27017"  
+      - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    healthcheck:  # Verifica se o MongoDB está pronto
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    networks:
+      - my-network
 
 volumes:
   mongo-data:
+
+networks:
+  my-network:  # Rede compartilhada entre os serviços
+    driver: bridge

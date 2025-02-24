@@ -40,6 +40,7 @@
                 <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">Cadastrar</button>
             </div>
         </form>
+        <p class="text-center mt-4">Já possui cadastro? <a href="login.html" class="text-blue-600">Faça login</a></p>
     </div>
     <script>
         document.getElementById('register-form').addEventListener('submit', async function(e) {
@@ -49,20 +50,17 @@
             const funcao = document.getElementById('funcao').value;
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
             try {
                 const response = await fetch('http://localhost:5000/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nome, matricula, funcao, username, password })
                 });
-
                 if (!response.ok) {
                     const errorData = await response.json();
                     alert('Erro no cadastro: ' + errorData.message);
                     return;
                 }
-
                 alert('Cadastro realizado com sucesso!');
                 window.location.href = 'login.html'; // Redirecionar para a página de login
             } catch (error) {
